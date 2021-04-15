@@ -1,0 +1,198 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+</head>
+    <body>
+    </br>
+        <div align="center" vertical-align="middle" line-height=10px>
+            <span style="color: #ffffff;font-size: 20px;font-family:Georgia, 'Times New Roman', Times, serif; border-bottom: 1px solid; padding: 5px;">
+                卖出1份认购期权的同时，卖出2份相同标的、相同到期日和执行价格的认沽期权。</br>
+                适用于投资者预期标的物价格变化不大、波动率中性或降低的情形，是小幅震荡策略。</br>
+                且更倾向于波动率降低的概率更大、标的物价格下跌的概率更小。
+            </span>
+            <form action="" method="get">
+                </br>
+                <span style="color: #ffffff;font-size: 20px;font-family:Georgia, 'Times New Roman', Times, serif;">
+                构建不对称的陡坡</br>
+                试试看 -> 选择顶部序列组合的操作<br />
+                tip: 选择两个<br />
+                </span>
+            </form>
+        </div>
+         <div >
+            <span style="color: #ffffff;font-size: 20px;font-family:Georgia, 'Times New Roman', Times, serif;vertical-align:middle">
+
+            <input type="checkbox" name="check" id="1" value="11" />卖出1份看涨期权，执行价$90</br>
+            <input type="checkbox" name="check" id="2" value="22" />卖出1份看跌期权，执行价$90</br>
+            <input type="checkbox" name="check" id="3" value="33" />卖出2份看涨期权，执行价$90</br>
+            <input type="checkbox" name="check" id="4" value="44" />卖出2份看跌期权，执行价$90
+            </span>
+        </div>
+        <script>
+            $(document).ready(function() {
+                var i=0;
+                $('input[type=checkbox][name=check]').change(function() {
+                        if($("#1").prop("checked")){
+                            if($("#4").prop("checked")){
+                                if($("#2").prop("checked",false)){
+                                    if($("#3").prop("checked",false)){
+                                        i=1;
+                                    }
+                                }
+                            }
+                        }
+                    if(i==1){
+                        show();
+                    }
+                    else 
+                    {
+                        wordplay();
+                    }    
+                });
+            });
+        </script>
+        </br>
+        <h2 style="display:none; color: #ffffff;display:none">再看一遍下划线呢？</h2>
+        <h3 style="color: #ffffff;display:none">正确</h3>
+    <img src="images/bull3.png" style="display:none" width=50% id="i1" />
+    <script>
+        function wordplay() {
+            $('h2').fadeIn(10);
+            $('h2').fadeOut(1000);
+        }
+        function show() {
+            $('h3').fadeIn(1000);
+            $('h3').fadeOut(2000);
+        }
+    </script>
+    </body>
+    <body id="my">
+        <div id="main" style="width: 50%;height:500px;"></div>
+        <script type="text/javascript" id="my2" style="display:none">
+            var myChart = echarts.init(document.getElementById('main'));
+            var option = {
+                title: {
+                    text: '顶部序列组合',
+                    textStyle: {
+                        color: '#ffffff',
+                        fontSize: 18
+                    },
+                },
+                tooltip: {},
+                legend: {
+                    textStyle: {
+                        color: '#ffffff',
+                        fontSize: 18
+                    },
+                    data: ['Call', 'Put', 'Spread']
+                },
+                xAxis: {
+                    name: 'Price',
+                    nameTextStyle: {
+                        color: '#ffffff',
+                        fontSize: 18
+                    },
+                    axisLabel: {
+                        color: '#ffffff',
+                        fontSize: 18
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#ffffff', // 颜色
+                            width: 3 // 粗细
+                        }
+                    },
+                    data: ['$70', '$80', '$90', '$100', '$110', '$120'],
+                    color: '#ffffff',
+                },
+                yAxis: {
+                    name: 'Profit/Loss',
+                    nameTextStyle: {
+                        color: '#ffffff',
+                        fontSize: 18
+                    },
+                    axisLabel: {
+                        color: '#ffffff',
+                        fontSize: 18
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#ffffff', // 颜色
+                            width: 3 // 粗细
+                        }
+                    },
+                },
+                grid: {
+                    show: true
+                },
+                series: [{
+                    name: 'C',
+                    type: 'line',
+                    symbol: 'circle',
+                    symbolSize: 8,
+                    data: [500, 500,500,0,-500, -1000],
+                    lineStyle: {
+                        normal: {
+                            type:'dashed',
+                            width: 2,
+                            color: 'white'
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: 'white',
+                            borderColor: '#b1b1b1',
+    
+                        }
+                    },
+                },
+                {
+                    name: 'P',
+                    type: 'line',
+                    symbol: 'circle',
+                    symbolSize: 8,
+                    data: [  -1000,0, 1000,1000,1000, 1000],
+                    lineStyle: {
+                        normal: {
+                            type:'dashed',
+                            width: 2,
+                            color: 'white'
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: 'white',
+                            borderColor: '#b1b1b1',
+    
+                        }
+                    },
+                },
+                {
+                    name: 'S',
+                    type: 'line',
+                    symbol: 'circle',
+                    symbolSize: 8,
+                    data: [-500, 500, 1500, 1000, 500, 0],
+                    lineStyle: {
+                        normal: {
+                            width: 4,
+                            color: 'white'
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: 'white',
+                            borderColor: '#b1b1b1',
+    
+                        }
+                    },
+                }
+            ]
+            };
+            myChart.setOption(option);
+        </script>
+    </body>
+
+</html>

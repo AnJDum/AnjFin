@@ -1,0 +1,70 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script src="js/echarts.min.js"></script>
+</head>
+
+<body>
+    <div id="main" style="width: 800px;height:400px;"></div>
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('main'));
+
+        var option = {
+            title: {
+                text: '买入看涨期权'
+            },
+            tooltip: {},
+            legend: {
+                data: ['Profit/Loss']
+            },
+            xAxis: {
+                name: 'Stock Price',
+                data: ['$70', '$80', '$90', '$100', '$110', '$120']
+            },
+            yAxis: {
+                name: 'Profit/Loss'
+            },
+            series: [{
+                name: 'Profit/Loss',
+                type: 'line',
+
+                data: [-500, -500, -500, 0, 500, 1000],
+                markLine: {
+                    symbol: 'none',
+                    silent: true,
+                    data: [{
+                        symbol: "none",
+                        xAxis: '$90',
+                    }],
+
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                type: 'solid',
+                            },
+                        },
+                        label: {
+                            show: true,
+                            formatter: 'chd',
+                            textStyle: {
+                                color: 'black',//标注线终点文字颜色
+                                fontSize: 20,
+                                fontWeight: 800,
+                                padding: [0, 0, 10, 0],//文字间距
+                            }
+                        }
+                    },
+                },
+
+
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

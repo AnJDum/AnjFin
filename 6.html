@@ -1,0 +1,200 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+</head>
+
+<body>
+    </br>
+    <div align="center" vertical-align="middle" line-height=10px>
+        <span
+            style="color: #ffffff;font-size: 20px;font-family:Georgia, 'Times New Roman', Times, serif; border-bottom: 1px solid; padding: 5px;">
+            买入1份较高执行价格的认购期权，</br>
+            同时卖出1份同一标的、相同到期日的较低执行价格的认购期权。</br>
+            两份期权的行权价都应高于当前的股票价格，以确保股票价格没有变化也能获利。</br>
+            市场适度下跌时就可以赚钱，最大收益是净期权费。
+            </br>
+        </span>
+        <form action="" method="get">
+            </br>
+            <span style="color: #ffffff;font-size: 20px;font-family:Georgia, 'Times New Roman', Times, serif;">
+                关键是执行价格差，买高卖低！</br>
+                试试看 -> 选择你的操作<br />
+                tip: 选择两个<br />
+            </span>
+        </form>
+    </div>
+    <div>
+        <span
+            style="color: #ffffff;font-size: 20px;font-family:Georgia, 'Times New Roman', Times, serif;vertical-align:middle">
+
+            <input type="checkbox" name="check" id="1" value="11" />买入看涨期权，执行价$90</br>
+            <input type="checkbox" name="check" id="2" value="22" />买入看跌期权，执行价$90</br>
+            <input type="checkbox" name="check" id="3" value="33" />卖出看涨期权，执行价$80</br>
+            <input type="checkbox" name="check" id="4" value="44" />卖出看跌期权，执行价$80</br>
+        </span>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('input[type=checkbox][name=check]').change(function () {
+                if ($("#1").prop("checked")) {
+                    if ($("#3").prop("checked")) {
+                        if ($("#2").prop("checked", false)) {
+                            if ($("#4").prop("checked", false)) {
+                                show();
+                            }
+                            else wordplay();
+                        }
+                        else wordplay();
+                    }
+                    else wordplay();
+                }
+                else wordplay();
+            });
+        });
+    </script>
+    </br>
+    <h2 style="display:none; color: #ffffff;display:none">再看一遍下划线呢？</h2>
+    <h3 style="color: #ffffff;display:none">正确</h3>
+    <img src="images/bull3.png" style="display:none" width=50% id="i1" />
+    <script>
+        function wordplay() {
+            $('h2').fadeIn(10);
+            $('h2').fadeOut(1000);
+        }
+        function show() {
+            $('h3').fadeIn(1000);
+            $('h3').fadeOut(2000);
+        }
+    </script>
+</body>
+<body id="my">
+    <div id="main" style="width: 50%;height:400px;"></div>
+    <script type="text/javascript" id="my2" style="display:none">
+        var myChart = echarts.init(document.getElementById('main'));
+        var option = {
+            title: {
+                text: '熊市价差组合',
+                textStyle: {
+                    color: '#ffffff',
+                    fontSize: 18
+                },
+            },
+            tooltip: {},
+            legend: {
+                textStyle: {
+                    color: '#ffffff',
+                    fontSize: 18
+                },
+                data: ['Call', 'Put', 'Spread']
+            },
+            xAxis: {
+                name: 'Price',
+                nameTextStyle: {
+                    color: '#ffffff',
+                    fontSize: 18
+                },
+                axisLabel: {
+                    color: '#ffffff',
+                    fontSize: 18
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#ffffff', // 颜色
+                        width: 3 // 粗细
+                    }
+                },
+                data: ['$70', '$80', '$90', '$100', '$110', '$120'],
+                color: '#ffffff',
+            },
+            yAxis: {
+                name: 'Profit/Loss',
+                nameTextStyle: {
+                    color: '#ffffff',
+                    fontSize: 18
+                },
+                axisLabel: {
+                    color: '#ffffff',
+                    fontSize: 18
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#ffffff', // 颜色
+                        width: 3 // 粗细
+                    }
+                },
+            },
+            grid: {
+                show: true
+            },
+            series: [{
+                name: 'C',
+                type: 'line',
+                symbol: 'circle',
+                symbolSize: 8,
+                data: [-200, -200, 300, 800, 1300, 1800],
+                lineStyle: {
+                    normal: {
+                        type:'dashed',
+                        width: 2,
+                        color: 'white'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: 'white',
+                        borderColor: '#b1b1b1',
+
+                    }
+                },
+            },
+            {
+                name: 'P',
+                type: 'line',
+                symbol: 'circle',
+                symbolSize: 8,
+                data: [500, 500, 500, 0, -500, -1000],
+                lineStyle: {
+                    normal: {
+                        type:'dashed',
+                        width: 2,
+                        color: 'white'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: 'white',
+                        borderColor: '#b1b1b1',
+
+                    }
+                },
+            },
+            {
+                name: 'S',
+                type: 'line',
+                symbol: 'circle',
+                symbolSize: 8,
+                data: [300, 300, 800, 800, 800, 800],
+                lineStyle: {
+                    normal: {
+                        width: 4,
+                        color: 'white'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: 'white',
+                        borderColor: '#b1b1b1',
+
+                    }
+                },
+            }
+        ]
+        };
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

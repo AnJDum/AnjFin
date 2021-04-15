@@ -1,0 +1,187 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+
+</head>
+
+<body>
+    </br>
+    <div align="center" vertical-align="middle" line-height=10px>
+        <span
+            style="color: #ffffff;font-size: 20px;font-family:Georgia, 'Times New Roman', Times, serif; border-bottom: 1px solid; padding: 5px;">
+            认沽期权，指买方有权根据约定，在规定期限(如到期日)，向期权卖方以行权价卖出指定数量的标的证券；</br>
+            而认沽期权卖方在买方要求行权时，有义务按行权价买入指定数量的标的证券。</br>
+            其中，买方享有卖出选择权。</br>
+        </span>
+        <form action="" method="get">
+            </br>
+            <span style="color: #ffffff;font-size: 20px;font-family:Georgia, 'Times New Roman', Times, serif;">
+                这与买入认购期权是对称的操作！</br>
+                试试看 -> 选择你的操作<br /><br />
+            </span>
+        </form>
+    </div>
+    <div>
+        <span
+            style="color: #ffffff;font-size: 20px;font-family:Georgia, 'Times New Roman', Times, serif;margin-right: 300px;">
+
+            <input type="radio" name="bull" id="01" value="01">买入看涨期权</br>
+            <input type="radio" name="bull" id="02" value="02">买入看跌期权</br>
+            <input type="radio" name="bull" id="03" value="03">卖出看涨期权</br>
+            <input type="radio" name="bull" id="04" value="04">卖出看跌期权</br>
+        </span>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('input[type=radio][name=bull]').change(function () {
+                if (this.value != '04') {
+                    wordplay();
+                }
+                else {
+                    show();
+                }
+            });
+        });
+    </script>
+    </br>
+    <h2 style="color: #ffffff;display:none">牛市不是这样卖东西的喔</h2>
+    <h3 style="color: #ffffff;display:none">正确</h3>
+    <img src="images/bull2.png" style="display:none" width=50% id="i1" />
+
+    <script>
+        function wordplay() {
+            $('h2').fadeIn(1000);
+            $('h2').fadeOut(1000);
+        }
+        function show() {
+            $('h3').fadeIn(1000);
+            $('h3').fadeOut(2000);
+        }
+    </script>
+</body>
+
+
+<body id="my">
+    <div id="main" style="width: 50%;height:400px;"></div>
+    <div id="my1" style="display:none">
+        <script type="text/javascript" id="my2" style="display:none">
+            var myChart = echarts.init(document.getElementById('main'));
+            var option = {
+                title: {
+                    text: '卖出看跌期权',
+                    textStyle: {
+                        color: '#ffffff',
+                        fontSize: 18
+                    },
+                },
+                tooltip: {},
+                legend: {
+                    textStyle: {
+                        color: '#ffffff',
+                        fontSize: 18
+                    },
+                    data: ['Profit/Loss']
+                },
+                xAxis: {
+                    name: 'Price',
+                    nameTextStyle: {
+                        color: '#ffffff',
+                        fontSize: 18
+                    },
+                    axisLabel: {
+                        color: '#ffffff',
+                        fontSize: 18
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#ffffff', // 颜色
+                            width: 3 // 粗细
+                        }
+                    },
+                    data: ['$70', '$80', '$90', '$100', '$110', '$120'],
+                    color: '#ffffff',
+                },
+                yAxis: {
+                    name: 'Profit/Loss',
+                    nameTextStyle: {
+                        color: '#ffffff',
+                        fontSize: 18
+                    },
+                    axisLabel: {
+                        color: '#ffffff',
+                        fontSize: 18
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#ffffff', // 颜色
+                            width: 3 // 粗细
+                        }
+                    },
+                },
+                grid: {
+                    show: true
+                },
+                series: [{
+                    name: 'Profit/Loss',
+                    type: 'line',
+                    symbol: 'circle',
+                    symbolSize: 8,
+                    data: [-1000, -500, 0, 500, 500, 500],
+                    markLine: {
+                        symbol: 'none',
+                        silent: true,
+                        data: [{
+                            symbol: 'none',
+                            xAxis: '$90',
+                        }],
+                        itemStyle: {
+                            normal: {
+                                lineStyle: {
+                                    type: 'solid',
+                                    color: '#ffffff',
+                                },
+                            },
+                            label: {
+                                show: false,
+                                formatter: 'chd',
+                                textStyle: {
+                                    color: 'white',//标注线终点文字颜色
+                                    fontSize: 20,
+                                    fontWeight: 800,
+                                    padding: [0, 0, 10, 0],//文字间距
+                                }
+                            }
+                        },
+                        lineStyle: {
+                            normal: {
+                                width: 3,
+                                color: 'white'
+                            }
+                        }
+                    },
+                    lineStyle: {
+                        normal: {
+                            width: 5,
+                            color: 'white'
+                        }
+                    },
+                    itemStyle:{
+                        normal:{
+                            color:'white',
+                            borderColor:'#b1b1b1',
+                            
+                        }
+                    },
+                }]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        </script>
+    </div>
+</body>
+
+</html>

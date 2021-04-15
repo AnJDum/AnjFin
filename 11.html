@@ -1,0 +1,157 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+</head>
+    <body >
+    </br>
+        <div align="center" vertical-align="middle" line-height=10px>
+            <span style="color: #ffffff;font-size: 20px;font-family:Georgia, 'Times New Roman', Times, serif; border-bottom: 1px solid; padding: 5px;">
+                卖出一份认购期权的同时，买入一份相同标的、相同执行价但到期日更长的认购期权。</br>
+                该策略适合标的50ETF价格变化较小，波动率中性市场。</br>
+                如果投资者预期市场处于振荡行情，但倾向于小幅上行，可以选择期权执行价格高于当时的标的物价格，构建出牛市日历价差组合。</br>
+                反之，如果预期市场处于振荡行情但倾向于市场下跌，则可以选择期权执行价格低于当时标的物价格，构建出熊市日历价差组合。</br>
+                
+                        </span>
+            <form action="" method="get">
+                </br>
+                <span style="color: #ffffff;font-size: 20px;font-family:Georgia, 'Times New Roman', Times, serif;">
+                关键是卖短买长！</br>
+                试试看 -> 选择牛市日历价差组合的操作<br />
+                tip: 选择两个<br />
+                </span>
+            </form>
+        </div>
+         <div >
+            <span style="color: #ffffff;font-size: 20px;font-family:Georgia, 'Times New Roman', Times, serif;vertical-align:middle">
+
+            <input type="checkbox" name="check" id="1" value="11" />买入1份看涨期权，执行价$100，一年后到期</br>
+            <input type="checkbox" name="check" id="2" value="22" />买入1份看跌期权，执行价$100，一年后到期</br>
+            <input type="checkbox" name="check" id="3" value="33" />卖出1份看涨期权，执行价$90，半年后到期</br>
+            <input type="checkbox" name="check" id="4" value="44" />卖出1份看跌期权，执行价$90，半年后到期
+            </span>
+        </div>
+        <script>
+            $(document).ready(function() {
+                var i=0;
+                $('input[type=checkbox][name=check]').change(function() {
+                        if($("#1").prop("checked")){
+                            if($("#3").prop("checked")){
+                                if($("#2").prop("checked",false)){
+                                    if($("#4").prop("checked",false)){
+                                        i=1;
+                                    }
+                                }
+                            }
+                        }
+                    if(i==1){
+                        show();
+                    }
+                    else 
+                    {
+                        wordplay();
+                    }    
+                });
+            });
+        </script>
+        </br>
+        <h2 style="display:none; color: #ffffff;display:none">再看一遍下划线呢？</h2>
+        <h3 style="color: #ffffff;display:none">正确</h3>
+        <script>
+            function wordplay() {
+                $('h2').fadeIn(10);
+                $('h2').fadeOut(1000);
+            }
+            function show() {
+                $('h3').fadeIn(1000);
+                $('h3').fadeOut(2000);
+            }
+        </script>
+    </body>
+    <body id="my">
+        <div id="main" style="width: 50%;height:500px;"></div>
+        <script type="text/javascript" id="my2" style="display:none">
+            var myChart = echarts.init(document.getElementById('main'));
+            var option = {
+                title: {
+                    text: '牛市日历价差组合',
+                    textStyle: {
+                        color: '#ffffff',
+                        fontSize: 18
+                    },
+                },
+                tooltip: {},
+                legend: {
+                    textStyle: {
+                        color: '#ffffff',
+                        fontSize: 18
+                    },
+                    data: ['Call', 'Put', 'Spread']
+                },
+                xAxis: {
+                    name: 'Price',
+                    nameTextStyle: {
+                        color: '#ffffff',
+                        fontSize: 18
+                    },
+                    axisLabel: {
+                        color: '#ffffff',
+                        fontSize: 18
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#ffffff', // 颜色
+                            width: 3 // 粗细
+                        }
+                    },
+                    data: ['$70', '$80', '$90', '$100', '$110', '$120','$130'],
+                    color: '#ffffff',
+                },
+                yAxis: {
+                    name: 'Profit/Loss',
+                    nameTextStyle: {
+                        color: '#ffffff',
+                        fontSize: 18
+                    },
+                    axisLabel: {
+                        color: '#ffffff',
+                        fontSize: 18
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#ffffff', // 颜色
+                            width: 3 // 粗细
+                        }
+                    },
+                },
+                grid: {
+                    show: true
+                },
+                series: [
+                {
+                    name: 'S',
+                    type: 'line',
+                    symbol: 'nome',
+                    smooth:true,
+                    data: [-500, -470, -120, 200,-120 ,-470,-500],
+                    lineStyle: {
+                        normal: {
+                            width: 4,
+                            color: 'white'
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: 'white',
+                            borderColor: '#b1b1b1',
+    
+                        }
+                    },
+                }
+            ]
+            };
+            myChart.setOption(option);
+        </script>
+    </body>
+</html>
